@@ -1,0 +1,39 @@
+Selenium tests for SAL
+======================
+Goal: Decrease time for integration testing through the magic of code!
+
+Prerequisites
+-------------
+You will need a test user that is already set up on the target server. 
+
+Installation
+------------
+Set up your virtualenv as usual and pip install ``requirements.txt``. For the purpose of these instructions, I'm going to assume that the name of your env is "saltest".
+
+Download geckodriver (the headless driver for Firefox) from https://github.com/mozilla/geckodriver/releases. Unzip it and move it to ``~/.virtualenvs/saltest/bin/``.
+
+Add the TeacherUser username and password to your virtualenv env (don't put this in the code!)::
+
+    echo "export TUSER=username" >> "$VIRTUAL_ENV/bin/postactivate"
+    echo "export TPASS=password" >> "$VIRTUAL_ENV/bin/postactivate"
+
+Running the code
+----------------
+You can either run the files on their own, or you can copy and paste them into the shell. The latter is a good option if you want to further play around with the driver, since ``main()`` returns it.
+
+Good to know
+------------
+
+* Pausing is good. It can sometimes take a bit for elements to get onto the page.
+* None of the scripts shut down the browser after they run. We should keep it this way for now, so testers can poke around more if needed.
+* Use TODO liberally in the comments. 
+
+Documentation
+-------------
+I have mostly been using the unofficial docs:
+
+http://selenium-python.readthedocs.io/
+
+The official docs are here:
+
+http://www.seleniumhq.org/
