@@ -107,6 +107,12 @@ def check_data(driver, data):
 
     print "Errors found:", errors
 
+def set_status(driver):
+    priv = driver.find_element_by_xpath('//*[@id="visibilityOptions2"]')
+    priv.click()
+    subm = driver.find_element_by_xpath('/html/body/section/div/ui-view/div/div/div[2]/div[2]/button')
+    subm.click()
+
 def main():
     base_url = "http://127.0.0.1:5000/lingshare-dev/#"
     driver = webdriver.Firefox()
