@@ -7,20 +7,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 
-def pause(n, msg="(Loading)"):
-    print "Sleeping for", n, "-", msg
-    sleep(n)
-
-def login(driver):
-    print "Logging in"
-    tlogin = driver.find_element_by_id("teacher-sign-in")
-    tlogin.click()
-    ufield = driver.find_element_by_id("login-email")
-    pfield = driver.find_element_by_id("login-password")
-    subbtn = driver.find_element_by_id("login-button")
-    ufield.send_keys(os.environ.get('TUSER'))
-    pfield.send_keys(os.environ.get('TPASS'))
-    subbtn.click()
+from utilities import pause, getopts, teacher_login
 
 def create_wl(driver):
     return_data = []
@@ -71,7 +58,7 @@ def add_words(driver):
     words = ['apple','blue', 'button', 'auto']
     for word in words:
         driver.find_element_by_name("new_target_word-0").send_keys(word)
-        pause(2, "waiting for words")
+        pause(3, "waiting for words")
         wd = driver.find_element_by_xpath("//form[2]/div/div[2]/a[1]/div")
         data.append(("Word", wd.text))
         wd.click()
@@ -119,7 +106,7 @@ def main():
     driver.get(base_url)
     pause(5, "Loading up page")
 
-    login(driver)
+    teacher_login(driver)
     pause(5)
     data = create_wl(driver)
     pause(5)

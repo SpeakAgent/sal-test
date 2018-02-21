@@ -1,28 +1,18 @@
 # Create a lesson from a wordlist. 
 from datetime import datetime
-import os
+import os, sys
 from time import sleep
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 
-def pause(n, msg="(Loading)"):
-    print "Sleeping for", n, "-", msg
-    sleep(n)
-
-def login(driver):
-    print "Logging in"
-    tlogin = driver.find_element_by_id("teacher-sign-in")
-    tlogin.click()
-    ufield = driver.find_element_by_id("login-email")
-    pfield = driver.find_element_by_id("login-password")
-    subbtn = driver.find_element_by_id("login-button")
-    ufield.send_keys(os.environ.get('TUSER'))
-    pfield.send_keys(os.environ.get('TPASS'))
-    subbtn.click()
+from utilities import pause, getopts, teacher_login
 
 def create_lesson_from_wl(driver):
+    ''' Creates a lesson from the 'create lesson' button on a wordlist.
+        Assumes that the wordlist the 'create lesson' button is active.
+    '''
     btn = driver.find_element_by_xpath("/html/body/section/div/ui-view/div/div/div[2]/div[3]/button")
     btn.click()
     pause(5)
@@ -40,7 +30,7 @@ def main(wlpk=2545):
     driver = webdriver.Firefox()
     driver.get(base_url)
     pause(5)
-    login(driver)
+    teacher_login(driver)
     pause(5)
     driver.get(base_url+wl_path)
     pause(5)
@@ -49,7 +39,11 @@ def main(wlpk=2545):
     return driver
 
 if __name__ == "__main__":
-    main()
+    args = getopts(sys.argv)
+    if '--pk' in args:
+        main(args['--pk'])
+    else:
+        main()
 
 
 
