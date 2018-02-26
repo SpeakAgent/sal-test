@@ -17,7 +17,7 @@ def create_classroom(driver):
     return_data = []
 
     driver.find_element_by_id("n-classes").click()
-    pause(8)
+    pause(5)
 
     driver.find_element_by_id("add-classroom").click()
     pause(1)

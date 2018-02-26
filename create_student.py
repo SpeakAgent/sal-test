@@ -14,7 +14,7 @@ def create_student(driver):
     return_data = []
 
     driver.find_element_by_id("n-classes").click()
-    pause(10)
+    pause(5)
 
     driver.find_element_by_id('your-students-tab').click()
     driver.find_element_by_id("add-student").click()
