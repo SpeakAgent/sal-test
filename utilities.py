@@ -21,7 +21,7 @@ def teacher_login(driver):
         Assumes that the username and password are in the env vars.
     '''
     print "Logging in"
-    tlogin = driver.find_element_by_id("teacher-sign-in")
+    tlogin = driver.find_element_by_class_name("btn-teacher")
     tlogin.click()
     ufield = driver.find_element_by_id("login-email")
     pfield = driver.find_element_by_id("login-password")
