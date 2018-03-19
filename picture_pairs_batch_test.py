@@ -10,6 +10,8 @@ from utilities import pause
 
 from picturepairs import play_game
 
+
+# Replace these with the lesson PK and the LI pk
 pks = [
  # (1866, 7322),
  (1749, 6648),
