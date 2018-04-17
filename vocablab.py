@@ -24,6 +24,8 @@ def get_word(driver):
     pause(5, "Letting Annie talk 3")
     ings = get_ingredients(driver)
 
+    # NEXT: Get the number of ingredients we'll need.
+
     # NEXT: Click ingredients until mix can be interacted with. Add them to used.
 
 

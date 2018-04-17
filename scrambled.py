@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from utilities import pause, getopts, teacher_login
 
 def start_game(driver):
+    driver.execute_script("window.scrollTo(0, 1080)")
     load_btn = driver.find_element_by_class_name('btn-container-new-game')
     load_btn.click()
     pause(5, "Wait for gremlins")
