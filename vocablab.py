@@ -1,4 +1,5 @@
 from datetime import datetime
+import itertools
 from random import choice
 
 from selenium import webdriver
@@ -22,14 +23,24 @@ def get_word(driver):
     btn = driver.find_element_by_xpath("//*[contains(text(), 'Next')]")    
     btn.click()
     pause(5, "Letting Annie talk 3")
-    ings = get_ingredients(driver)
 
-    # NEXT: Get the number of ingredients we'll need.
+    ings = get_ingredients(driver)
+    blanks = driver.find_elements_by_class_name('border-bottom-lines')    
+
+    combos = itertools.combinations(range(len(ings)), len(blanks))
 
     # NEXT: Click ingredients until mix can be interacted with. Add them to used.
+    for i, j in combos:
+        print "Trying", i,j
+        try:
+            ings[i].click()
+            ings[j].click()
+        except ElementNotInteractableException:
+            print "Returning..."
+            continue
 
-
-
+        driver.find_element_by_link_text('Mix!').click()
+        pause(3, "Waiting for mixing animation")
 
 
 def play_game(driver):
@@ -42,15 +53,19 @@ def play_game(driver):
     btn = driver.find_elements_by_xpath("//*[contains(text(), 'Play Now!')]")[1]
     btn.click()
     pause(5, "Let Annie talk...")
+    words = driver.find_elements_by_class_name("bold")
+    n = 0
+    for word in words:
+        if word.text: n +=1
 
-    while True:
+    for i in range(n):
         words = driver.find_elements_by_class_name("bold")
 
-        found_words.append(words[0].text)
-        words[0].click()
+        found_words.append(words[i].text)
+        words[i].click()
 
         get_word(driver)
-        break
+        
 
 
 
@@ -72,6 +87,8 @@ def main():
     teacher_login(driver)
     pause(5)
     driver.get(url)
+    pause(5)
+    play_game(driver)
 
     return driver, data
 
