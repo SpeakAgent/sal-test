@@ -73,12 +73,12 @@ def main():
     driver.get(url)
     pause(5, "Loading up page")
 
-    # driver.find_element_by_class_name('btn-with-symbol').click()
-    # pause(5, "Letting Annie speak")
-    # driver.find_element_by_xpath("//*[contains(text(), 'Start Game')]")
-    # pause(5, "Loading next page")
+    driver.find_element_by_class_name('btn-with-symbol').click()
+    pause(5, "Letting Annie speak")
+    driver.find_element_by_xpath("//*[contains(text(), 'Start Game')]").click()
+    pause(5, "Loading next page")
 
-    # play_game(driver)
+    play_game(driver)
 
     return driver, data  
 
