@@ -1,6 +1,6 @@
 Selenium tests for SAL
 ======================
-Goal: Decrease time for integration testing through the magic of code!
+Goal: To decrease the time for integration testing through the magic of code!
 
 Prerequisites
 -------------
@@ -24,7 +24,7 @@ You can either run the files on their own, or you can copy and paste them into t
 Good to know
 ------------
 
-* Pausing is good. It can sometimes take a bit for elements to get onto the page.
+* Waiting is good. It can sometimes take a bit for elements to get onto the page.
 * None of the scripts shut down the browser after they run. We should keep it this way for now, so testers can poke around more if needed.
 * Use TODO liberally in the comments. 
 
